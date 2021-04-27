@@ -1,12 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
-import Button from './Button';
+import Button from './shared/Button';
+import {signOut} from "../redux/actions/authActions";
+import {useHistory} from "react-router";
+import {toast, ToastTypes} from "../utils/toast";
 
 function Header() {
-  const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
+  const {totalPrice, totalCount} = useSelector(({ cart }) => cart);
+  const {isAuthorized, role} = useSelector(({auth}) => auth)
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onSignOutClick = () => {
+    dispatch(signOut());
+    history.push('/');
+    toast(ToastTypes.SUCCESS, 'Поздравляю', 'Вы благополучно вышли нахуй')
+  }
 
   return (
     <div className="header">
@@ -22,20 +34,52 @@ function Header() {
         </Link>
 
         <div className="header__actions">
-          <Link to="/signup">
-            <Button className="button--sign">
-              Sign Up
-            </Button>
-          </Link>
-          <Link to="/signin">
-            <Button className="button--sign">
-              Sign In
-            </Button>
-          </Link>
+
+          {
+            isAuthorized ? (
+                <>
+                  {
+                    role === 'ADMIN' && (
+                        <Link to="/admin">
+                          <Button className="button--sign">
+                            Админка
+                          </Button>
+                        </Link>
+                    )
+                  }
+                  {
+                    role === 'USER' && (
+                        <Link to="/profile">
+                          <Button className="button--sign">
+                            Профиль
+                          </Button>
+                        </Link>
+                    )
+                  }
+                  <Button className="button--sign" onClick={onSignOutClick}>
+                    Выход
+                  </Button>
+                </>
+            ) : (
+                <>
+                  <Link to="/signup">
+                    <Button className="button--sign">
+                      Регистрация
+                    </Button>
+                  </Link>
+                  <Link to="/signin" >
+                    <Button className="button--sign">
+                      Вход
+                    </Button>
+                  </Link>
+                </>
+            )
+          }
+
           <div className="header__cart">
             <Link to="/cart">
               <Button className="button--cart">
-                <span>{totalPrice} ₽</span>
+                <span>{totalPrice} ₴</span>
                 <div className="button__delimiter"></div>
                 <svg
                     width="18"

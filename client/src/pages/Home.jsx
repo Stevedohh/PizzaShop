@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Categories, PizzaBlock, PizzaLoadingBlock } from '../components';
 
-import {fetchCategories, fetchPizzas, fetchPizzasByCategory} from '../redux/actions/pizzas';
-import {setCategory} from "../redux/actions/filters";
+import {fetchCategories, fetchPizzas, fetchPizzasByCategory} from '../redux/actions/pizzasActions';
+import {setCategory} from "../redux/actions/filtersActions";
 
 function Home() {
   const dispatch = useDispatch();
@@ -37,30 +37,32 @@ function Home() {
   };
 
   return (
-    <div className="container">
-      <div className="content__top">
-        <Categories
-          activeCategory={category}
-          onClickCategory={onSelectCategory}
-          items={categories}
-        />
+      <div className="content">
+        <div className="container">
+          <div className="content__top">
+            <Categories
+              activeCategory={category}
+              onClickCategory={onSelectCategory}
+              items={categories}
+            />
+          </div>
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            {isLoaded
+              ? pizzas.map((pizza) => (
+                  <PizzaBlock
+                    onClickAddPizza={handleAddPizzaToCart}
+                    key={pizza.id}
+                    addedCount={cartItems[pizza.id] && cartItems[pizza.id].items.length}
+                    {...pizza}
+                  />
+                ))
+              : Array(8)
+                  .fill(0)
+                  .map((_, index) => <PizzaLoadingBlock key={index} />)}
+          </div>
+        </div>
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoaded
-          ? pizzas.map((pizza) => (
-              <PizzaBlock
-                onClickAddPizza={handleAddPizzaToCart}
-                key={pizza.id}
-                addedCount={cartItems[pizza.id] && cartItems[pizza.id].items.length}
-                {...pizza}
-              />
-            ))
-          : Array(8)
-              .fill(0)
-              .map((_, index) => <PizzaLoadingBlock key={index} />)}
-      </div>
-    </div>
   );
 }
 

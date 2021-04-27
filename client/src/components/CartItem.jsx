@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button';
+import Button from './shared/Button';
 
 const CartItem = ({ id, name, type, size, totalPrice, totalCount, onRemove, onMinus, onPlus }) => {
   const handleRemoveClick = () => {

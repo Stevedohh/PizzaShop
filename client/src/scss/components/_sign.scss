@@ -1,1 +1,29 @@
+.sign {
+  padding: 40px 0;
+  height: 700px;
 
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    display: flex;
+    max-width: 400px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+
+    & > .input {
+      margin-bottom: 15px;
+    }
+    &-submit {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  }
+}
+
+.error-message {
+  color: red;
+}

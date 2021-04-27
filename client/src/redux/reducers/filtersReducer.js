@@ -6,7 +6,7 @@ const initialState = {
   },
 };
 
-const filters = (state = initialState, action) => {
+const filtersReducer = (state = initialState, action) => {
   if (action.type === 'SET_SORT_BY') {
     return {
       ...state,
@@ -22,4 +22,4 @@ const filters = (state = initialState, action) => {
   return state;
 };
 
-export default filters;
+export default filtersReducer;

@@ -20,7 +20,7 @@ const getTotalSum = (obj, path) => {
   }, 0);
 };
 
-const cart = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PIZZA_CART': {
       const currentPizzaItems = !state.items[action.payload.id]
@@ -116,4 +116,4 @@ const cart = (state = initialState, action) => {
   }
 };
 
-export default cart;
+export default cartReducer;

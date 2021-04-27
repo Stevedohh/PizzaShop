@@ -1,0 +1,15 @@
+.profile {
+  display: flex;
+  height: 700px;
+
+  &__tabs {
+    height: 100%;
+    width: 20%;
+    border-right: 1px solid $gray-line;
+  }
+
+  &__content {
+    height: 100%;
+    width: 80%;
+  }
+}
