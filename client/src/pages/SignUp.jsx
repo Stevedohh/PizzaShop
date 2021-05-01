@@ -75,7 +75,7 @@ const SignUp = () => {
                 </Input>
                 <Input
                     type="text"
-                    label="Адресс"
+                    label="Адрес"
                     name="address"
                     register={register({required: true})}
                 >

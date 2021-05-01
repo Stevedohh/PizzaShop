@@ -47,4 +47,23 @@ export class OrderService {
 
     return this.orderRepository.save(this.orderRepository.create(order));
   }
+
+  async getAll() {
+    return await this.orderRepository.find({
+      relations: ['orderProduct', 'user', 'orderProduct.product'],
+    });
+  }
+
+  async getByUser(authorization) {
+    const token = authorization.split(' ')[1];
+
+    return await this.orderRepository.find({
+      relations: ['orderProduct', 'user', 'orderProduct.product'],
+      where: {
+        user: {
+          id: this.jwtService.decode(token)['id'],
+        },
+      },
+    });
+  }
 }

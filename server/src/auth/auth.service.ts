@@ -1,6 +1,8 @@
 import {
+  forwardRef,
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -13,6 +15,7 @@ import { UsersEntity } from '../users/users.entity';
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
     private jwtService: JwtService,
   ) {}
@@ -36,12 +39,7 @@ export class AuthService {
     throw new UnauthorizedException({ message: 'Wrong password or email' });
   }
 
-  async login(userDto: CreateUserDto) {
-    const user = await this.validateUser(userDto);
-    return this.generateToken(user);
-  }
-
-  async registration(userDto: CreateUserDto) {
+  async createUser(userDto: CreateUserDto) {
     const candidate = await this.userService.getByEmail(userDto.email);
 
     if (candidate) {
@@ -52,9 +50,18 @@ export class AuthService {
     }
 
     const hashedPassword = await bcrypt.hash(userDto.password, 5);
+    return { ...userDto, password: hashedPassword };
+  }
+
+  async login(userDto: CreateUserDto) {
+    const user = await this.validateUser(userDto);
+    return this.generateToken(user);
+  }
+
+  async registration(userDto: CreateUserDto) {
+    const newUser = await this.createUser(userDto);
     const user = await this.userService.create({
-      ...userDto,
-      password: hashedPassword,
+      ...newUser,
     });
 
     return this.generateToken(user);

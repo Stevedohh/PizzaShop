@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
-import {log} from "util";
 
 @Injectable()
 export class ProductService {
@@ -25,9 +24,6 @@ export class ProductService {
   }
 
   async getByCategory(category) {
-    // if (!category) {
-    //   return this.getAll();
-    // }
     return await this.productRepository.find({ category });
   }
 
@@ -39,8 +35,8 @@ export class ProductService {
     );
   }
 
-  async update(id, product) {
-    return this.productRepository.update({ id }, { ...product });
+  async update(id, productDto: CreateProductDto) {
+    return this.productRepository.update({ id }, { ...productDto });
   }
 
   async delete(id) {

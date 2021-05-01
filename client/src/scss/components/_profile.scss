@@ -4,12 +4,45 @@
 
   &__tabs {
     height: 100%;
-    width: 20%;
+    width: 13%;
     border-right: 1px solid $gray-line;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__content {
     height: 100%;
-    width: 80%;
+    width: 87%;
+  }
+
+  &__tab {
+    padding: 20px 0;
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.edit-profile {
+  padding: 0 50px;
+
+  &__title {
+    margin-top: 32px;
+  }
+
+  &__form {
+    max-width: 400px;
+    margin-top: 10px;
+
+    & > .input {
+      margin-bottom: 15px;
+    }
   }
 }
