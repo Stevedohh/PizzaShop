@@ -17,7 +17,7 @@ function Header() {
   const onSignOutClick = () => {
     dispatch(signOut());
     history.push('/');
-    toast(ToastTypes.SUCCESS, 'Поздравляю', 'Вы благополучно вышли нахуй')
+    toast(ToastTypes.SUCCESS, 'Поздравляю', 'Вы благополучно вышли')
   }
 
   return (

@@ -66,6 +66,9 @@ export class OrderService {
           id: this.jwtService.decode(token)['id'],
         },
       },
+      order: {
+        date: 'DESC',
+      },
     });
   }
 }
