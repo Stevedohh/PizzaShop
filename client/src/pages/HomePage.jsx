@@ -6,7 +6,7 @@ import { Categories, PizzaBlock, PizzaLoadingBlock } from '../components';
 import {fetchCategories, fetchPizzas, fetchPizzasByCategory} from '../redux/actions/pizzasActions';
 import {setCategory} from "../redux/actions/filtersActions";
 
-function Home() {
+function HomePage() {
   const dispatch = useDispatch();
   const pizzas = useSelector(({ pizzas }) => pizzas.items);
   const categories = useSelector(({ pizzas }) => pizzas.categories);
@@ -66,4 +66,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

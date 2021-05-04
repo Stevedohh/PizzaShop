@@ -9,7 +9,7 @@ import {setIsAuthorized, signIn, signUp} from "../redux/actions/authActions";
 import {toast, ToastTypes} from "../utils/toast";
 import {emailRegex, phoneRegex} from "../utils/regex";
 
-const SignUp = () => {
+const SignUpPage = () => {
     const {register, handleSubmit, errors, watch} = useForm();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -99,4 +99,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpPage;

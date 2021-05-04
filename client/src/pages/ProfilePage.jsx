@@ -3,24 +3,23 @@ import EditProfile from "../components/EditProfile";
 import Orders from "../components/Orders";
 import profileIcon from "../assets/icons/profile.svg"
 import ordersIcon from "../assets/icons/package.svg"
+import {classNames} from "../utils/classNames";
 
-const Profile = () => {
+const ProfilePage = () => {
     const [currentTab, setCurrentTab] = useState('orders');
-
-    // const setCurrentTab = () => {
-    //
-    // }
 
     return (
         <div className="profile">
             <div className="profile__tabs">
-                <div onClick={() => {
+                <div
+                    className={classNames([currentTab === 'profile' && 'active', "profile__tab"])}
+                    onClick={() => {
                     setCurrentTab('profile')
-                }} className="profile__tab">
+                }}>
                     <img className="profile__icon" src={profileIcon} alt="profile"/>
                 </div>
                 <div
-                    className="profile__tab"
+                    className={classNames([currentTab === 'orders' && 'active', "profile__tab"])}
                     onClick={() => {
                     setCurrentTab('orders')
                 }}>
@@ -39,4 +38,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfilePage;

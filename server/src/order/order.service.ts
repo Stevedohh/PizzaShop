@@ -19,8 +19,6 @@ export class OrderService {
   ) {}
 
   async create(orderDto: CreateOrderDto, authorization) {
-    const token = authorization.split(' ')[1];
-
     const order = new OrderEntity();
     order.address = orderDto.address;
     order.email = orderDto.email;
@@ -28,7 +26,8 @@ export class OrderService {
     order.orderProduct = [];
     order.totalPrice = 0;
 
-    if (token) {
+    if (authorization) {
+      const token = authorization.split(' ')[1];
       order.user = await this.usersService.getById(
         this.jwtService.decode(token)['id'],
       );
@@ -51,6 +50,9 @@ export class OrderService {
   async getAll() {
     return await this.orderRepository.find({
       relations: ['orderProduct', 'user', 'orderProduct.product'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 

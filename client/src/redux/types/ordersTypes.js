@@ -1,0 +1,2 @@
+export const GET_ORDERS = 'GET_USER_ORDERS';
+export const GET_SELECTED_ORDER = 'GET_SELECTED_ORDER';

@@ -23,8 +23,7 @@ export const fetchPizzas = () => (dispatch) => {
 
 export const fetchCategories = () => (dispatch) => {
   axios.get(`${environment.BASE_URL}/product/categories`).then(({data}) => {
-    const categories = data.map(item => item.category)
-    dispatch(setCategories(categories))
+    dispatch(setCategories(data))
   })
 }
 

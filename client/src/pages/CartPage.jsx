@@ -6,7 +6,7 @@ import cartEmptyImage from '../assets/img/empty-cart.png';
 import { CartItem, Button } from '../components';
 import { clearCart, removeCartItem, plusCartItem, minusCartItem } from '../redux/actions/cartActions';
 
-function Cart() {
+function CartPage() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
 
@@ -32,10 +32,6 @@ function Cart() {
 
   const onMinusItem = (id) => {
     dispatch(minusCartItem(id));
-  };
-
-  const onClickOrder = () => {
-    console.log('ВАШ ЗАКАЗ', items);
   };
 
   return (
@@ -123,6 +119,7 @@ function Cart() {
                     name={obj.name}
                     type={obj.type}
                     size={obj.size}
+                    imageUrl={obj.imageUrl}
                     totalPrice={items[obj.id].totalPrice}
                     totalCount={items[obj.id].items.length}
                     onRemove={onRemoveItem}
@@ -160,9 +157,11 @@ function Cart() {
                       <span>Вернуться назад</span>
                     </Link>
                   </a>
-                  <Button onClick={onClickOrder} className="pay-btn">
-                    <span>Оплатить сейчас</span>
-                  </Button>
+                  <Link to="/order">
+                    <Button className="pay-btn">
+                      <span>Оформить заказ</span>
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -187,4 +186,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default CartPage;

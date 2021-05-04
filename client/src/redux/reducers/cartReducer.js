@@ -1,5 +1,5 @@
 const initialState = {
-  items: {},
+  items: [],
   totalPrice: 0,
   totalCount: 0,
 };
@@ -31,7 +31,9 @@ const cartReducer = (state = initialState, action) => {
         ...state.items,
         [action.payload.id]: {
           items: currentPizzaItems,
+          quantity: currentPizzaItems.length,
           totalPrice: getTotalPrice(currentPizzaItems),
+          id: currentPizzaItems[0].id
         },
       };
 
@@ -71,6 +73,8 @@ const cartReducer = (state = initialState, action) => {
         [action.payload]: {
           items: newObjItems,
           totalPrice: getTotalPrice(newObjItems),
+          quantity: newObjItems.length,
+          id: newObjItems[0].id
         },
       };
 
@@ -94,6 +98,8 @@ const cartReducer = (state = initialState, action) => {
         [action.payload]: {
           items: newObjItems,
           totalPrice: getTotalPrice(newObjItems),
+          quantity: newObjItems.length,
+          id: newObjItems[0].id
         },
       };
 
@@ -109,7 +115,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case 'CLEAR_CART':
-      return { totalPrice: 0, totalCount: 0, items: {} };
+      return { totalPrice: 0, totalCount: 0, items: [] };
 
     default:
       return state;

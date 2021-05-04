@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
+import arrayContaining = jasmine.arrayContaining;
 
 @Injectable()
 export class ProductService {
@@ -20,7 +21,12 @@ export class ProductService {
   }
 
   async getAllCategories() {
-    return await this.productRepository.find({ select: ['category'] });
+    const categories = await this.productRepository.find({
+      select: ['category'],
+    });
+    const arrayOfCategories = categories.map(({ category }) => category);
+
+    return [...new Set(arrayOfCategories)];
   }
 
   async getByCategory(category) {

@@ -1,21 +1,20 @@
 import React from 'react';
 
 import {Header} from './components';
-import {Home, Cart, SignUp, SignIn} from './pages';
+import {AdminPage, CartPage, HomePage, OrderPage, ProfilePage, SignInPage, SignUpPage} from './pages';
 import {Route} from 'react-router-dom';
-import Admin from "./pages/Admin";
-import Profile from "./pages/Profile";
 
 function App() {
     return (
         <div className="wrapper">
             <Header/>
-            <Route exact path="/" component={Home}/>
-            <Route path="/cart" component={Cart}/>
-            <Route path="/signup" component={SignUp}/>
-            <Route path="/signin" component={SignIn}/>
-            <Route path="/admin" component={Admin}/>
-            <Route path="/profile" component={Profile}/>
+            <Route exact path="/" component={HomePage}/>
+            <Route path="/cart" component={CartPage}/>
+            <Route path="/signup" component={SignUpPage}/>
+            <Route path="/signin" component={SignInPage}/>
+            <Route path="/admin" component={AdminPage}/>
+            <Route path="/profile" component={ProfilePage}/>
+            <Route path="/order" component={OrderPage}/>
         </div>
     );
 }

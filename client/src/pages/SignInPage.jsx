@@ -9,7 +9,7 @@ import {toast, ToastTypes} from "../utils/toast";
 import {useHistory} from "react-router";
 import {emailRegex} from "../utils/regex";
 
-const SignIn = () => {
+const SignInPage = () => {
     const {register, handleSubmit, errors} = useForm();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -25,7 +25,6 @@ const SignIn = () => {
     const onSubmit = (data) => {
         dispatch(signIn(data, onSignInSuccess))
     };
-
 
     return (
         <div className="sign">
@@ -61,4 +60,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignInPage;

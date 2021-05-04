@@ -1,23 +1,23 @@
 import axios from "axios";
 import {environment} from "../environment";
 
-export class UserService {
+export class OrderService {
     token = localStorage.getItem('token');
 
-    get(onSuccess, onError) {
-        axios.get(`${environment.BASE_URL}/users`, {
-            headers: {
+    create(order, onSuccess, onError) {
+        axios.post(`${environment.BASE_URL}/order`, order, {
+            headers: this.token ? {
                 'Authorization': `token ${this.token}`
-            }
-        }).then((res) => {
+            } : {}
+        }).then(res => {
             onSuccess(res);
-        }).catch((e) => {
-            onError(e);
+        }).catch(e => {
+            onError(e)
         })
     }
 
-    update(data, onSuccess, onError) {
-        axios.put(`${environment.BASE_URL}/users`, data, {
+    getByUser(onSuccess, onError) {
+        axios.get(`${environment.BASE_URL}/order/user`, {
             headers: {
                 'Authorization': `token ${this.token}`
             }
@@ -28,8 +28,8 @@ export class UserService {
         })
     }
 
-    getOrders(onSuccess, onError) {
-        axios.get(`${environment.BASE_URL}/order/user`, {
+    getByAdmin(onSuccess, onError) {
+        axios.get(`${environment.BASE_URL}/order`, {
             headers: {
                 'Authorization': `token ${this.token}`
             }
